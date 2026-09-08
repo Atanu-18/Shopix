@@ -1,4 +1,12 @@
 const User = require('../model/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const sendEmail = require('../utils/sendEmail');
+
+const generateToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '30d'});
+};
+
 
 //register
 const registerUser = async(req,res) => {
@@ -20,9 +28,51 @@ const registerUser = async(req,res) => {
             `
 
             await sendEmail(email, 'welcome to Shopix - Your OTP for registration', message);
-            res.status(201).json({message: 'User registered successfully. Please check your email for the OTP.'});
+            res.status(201).json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                token: generateToken(user._id),
+                //otp: otp
+            });
+        } else {
+            res.status(400).json({message: 'Invalid user data'});
         }
     } catch (error) {
         res.status(500).json({message: 'Server error'});
     }
 };
+
+//login
+const loginUser = async(req,res) => {
+    const {email,password} = req.body;
+    try {
+        const user = await User.find({email});
+        if(user && (await bcrypt.compare(password, user.password))){
+            res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                token: generateToken(user._id)
+            });
+        } else {
+            res.status(400).json({message: 'Invalid email or password'});
+        }
+    } catch (error) {
+        res.status(500).json({message: 'Server error'});
+    }
+};
+
+//get user profile
+const getUsers = async(req,res) => {
+    try {
+        const users = await User.find({}).select('-password');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({message: 'Server error'});
+    }
+};
+
+module.exports = {registerUser, loginUser, getUsers};
