@@ -5,7 +5,8 @@
   "scripts": {
     
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "seed": "node seed.js"
   },
   "author": "Atanu Mandal",
   "license": "ISC",
