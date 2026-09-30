@@ -2,7 +2,7 @@ import React from 'react'
 
 function App() {
   return (
-    <div className='bg-yellow-400'>App</div>
+    <div className='bg-yellow-400'>hii shopix</div>
   )
 }
 
