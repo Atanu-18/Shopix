@@ -2,30 +2,40 @@ import React, { useState } from 'react'
 
 const Contact = () => {
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus("");
+
     const form = e.target;
-    const data = new FormData(form);
+    const formData = new FormData(form);
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
 
-    // Formspree free endpoint - tor email er jonno baniye dilam
-    // ekhane tor formspree id bosabi, nahole amar demo id diye test hobe
-    const res = await fetch("https://formspree.io/f/movqjwzp", {
-      method: "POST",
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (res.ok) {
-      setStatus("Message sent! Check your mail shopixecommerce0@gmail.com");
-      form.reset();
-    } else {
-      setStatus("Failed to send. Try again!");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("Message sent successfully! We'll get back to you within 2 hours. ✅");
+        form.reset();
+      } else {
+        setStatus("Failed to send. Please try again!");
+      }
+    } catch (err) {
+      setStatus("Network error! Please check your connection.");
+    } finally {
+      setLoading(false);
+      // 5 sec por message auto hide
+      setTimeout(() => setStatus(""), 5000);
     }
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f7ff]">
+    <div className="min-h-screen bg-[#f6f7ff] pt-[70px]">
       <div className="relative overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-violet-100 border-b border-black/5">
         <div className="absolute top-10 left-10 h-64 w-64 rounded-full bg-yellow-300/30 blur-3xl"></div>
         <div className="absolute bottom-0 right-20 h-64 w-64 rounded-full bg-violet-400/30 blur-3xl"></div>
@@ -66,25 +76,31 @@ const Contact = () => {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="text-xs font-bold tracking-widest text-gray-400">FIRST NAME</label>
-                  <input name="firstName" required placeholder="John" className="mt-2 w-full rounded-full bg-[#f6f7ff] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
+                  <input name="firstName" required placeholder="Atanu" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
                 </div>
                 <div>
                   <label className="text-xs font-bold tracking-widest text-gray-400">LAST NAME</label>
-                  <input name="lastName" required placeholder="Doe" className="mt-2 w-full rounded-full bg-[#f6f7ff] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
+                  <input name="lastName" required placeholder="Mandal" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
                 </div>
               </div>
               <div>
                 <label className="text-xs font-bold tracking-widest text-gray-400">EMAIL</label>
-                <input name="email" type="email" required placeholder="john@example.com" className="mt-2 w-full rounded-full bg-[#f6f7ff] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
+                <input name="email" type="email" required placeholder="atanu2697@gmail.com" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
               </div>
               <div>
                 <label className="text-xs font-bold tracking-widest text-gray-400">MESSAGE</label>
-                <textarea name="message" required rows="4" placeholder="How can we help you?" className="mt-2 w-full rounded-[20px] bg-[#f6f7ff] px-5 py-4 text-sm outline-none focus:ring-2 focus:ring-[#F9C301] resize-none"></textarea>
+                <textarea name="message" required rows="4" placeholder="How can we help you?" className="mt-2 w-full rounded-[20px] bg-[#EEF2FF] px-5 py-4 text-sm outline-none focus:ring-2 focus:ring-[#F9C301] resize-none"></textarea>
               </div>
-              <button type="submit" className="mt-2 w-full rounded-full bg-[#131A22] py-4 text-sm font-black tracking-widest text-white hover:bg-black transition-all">
-                SEND MESSAGE →
+
+              <button type="submit" disabled={loading} className="mt-2 w-full rounded-full bg-[#131A22] py-4 text-sm font-black cursor-pointer tracking-widest text-white hover:bg-black transition-all disabled:opacity-60">
+                {loading? "SENDING..." : "SEND MESSAGE →"}
               </button>
-              {status && <p className="text-center text-sm font-bold text-green-600 mt-2">{status}</p>}
+
+              {status && (
+                <div className={`text-center rounded-full py-3 px-4 text-sm font-bold border mt-2 ${status.includes("sent")? "bg-green-50 text-green-600 border-green-200" : "bg-red-50 text-red-600 border-red-200"}`}>
+                  {status}
+                </div>
+              )}
             </div>
           </form>
         </div>
