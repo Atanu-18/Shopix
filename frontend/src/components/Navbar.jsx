@@ -19,7 +19,7 @@ const Navbar = () => {
 
                 <ul className="flex items-center gap-7">
                     <li>
-                        <Link to="/" className="text-white/70 hover:text-[#F9C301] font-bold uppercase text-[13px] tracking-widest transition-colors">Shop</Link>
+                        <Link to="/shop" className="text-white/70 hover:text-[#F9C301] font-bold uppercase text-[13px] tracking-widest transition-colors">Shop</Link>
                     </li>
                     <li>
                         <Link to="/cart" className="text-white/70 hover:text-[#F9C301] font-bold uppercase text-[13px] tracking-widest transition-colors">Cart</Link>

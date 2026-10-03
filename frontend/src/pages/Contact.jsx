@@ -76,20 +76,20 @@ const Contact = () => {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="text-xs font-bold tracking-widest text-gray-400">FIRST NAME</label>
-                  <input name="firstName" required placeholder="Atanu" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
+                  <input name="firstName" required placeholder="John" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
                 </div>
                 <div>
                   <label className="text-xs font-bold tracking-widest text-gray-400">LAST NAME</label>
-                  <input name="lastName" required placeholder="Mandal" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
+                  <input name="lastName" required placeholder="Doe" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
                 </div>
               </div>
               <div>
                 <label className="text-xs font-bold tracking-widest text-gray-400">EMAIL</label>
-                <input name="email" type="email" required placeholder="atanu2697@gmail.com" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
+                <input name="email" type="email" required placeholder="john.doe@example.com" className="mt-2 w-full rounded-full bg-[#EEF2FF] px-5 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#F9C301]" />
               </div>
               <div>
                 <label className="text-xs font-bold tracking-widest text-gray-400">MESSAGE</label>
-                <textarea name="message" required rows="4" placeholder="How can we help you?" className="mt-2 w-full rounded-[20px] bg-[#EEF2FF] px-5 py-4 text-sm outline-none focus:ring-2 focus:ring-[#F9C301] resize-none"></textarea>
+                <textarea name="message" required rows="4" placeholder="Your message here..." className="mt-2 w-full rounded-[20px] bg-[#EEF2FF] px-5 py-4 text-sm outline-none focus:ring-2 focus:ring-[#F9C301] resize-none"></textarea>
               </div>
 
               <button type="submit" disabled={loading} className="mt-2 w-full rounded-full bg-[#131A22] py-4 text-sm font-black cursor-pointer tracking-widest text-white hover:bg-black transition-all disabled:opacity-60">
