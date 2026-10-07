@@ -8,7 +8,12 @@ const connectDB = require("./config/db");
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -23,6 +28,6 @@ app.use('/api/payment', require('./routes/paymentRoutes'));
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, ()=> {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
