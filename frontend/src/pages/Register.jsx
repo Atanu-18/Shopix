@@ -66,7 +66,7 @@ const Register = () => {
               onChange={e=>setPassword(e.target.value)}
               required
             />
-            <button className="w-full bg-black text-white py-3 rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-all">
+            <button className="w-full bg-black text-white py-3 rounded-lg text-sm font-semibold cursor-pointer hover:bg-zinc-800 transition-all">
               Register
             </button>
           </form>
