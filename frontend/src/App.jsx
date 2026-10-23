@@ -38,7 +38,6 @@ function App() {
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/order/:id" element={<OrderDetails />} />
-          {/* <Route path="/orders/:id" element={<OrderDetails />} /> */}
         </Routes>
       </main>
 
