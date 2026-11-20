@@ -6,9 +6,7 @@ The project focuses on essential e-commerce functionalities, secure authenticati
 
 🌐 **Live Demo:** https://shopix-drab.vercel.app/
 
-📂 **GitHub Repository:** https://github.com/Atanu-18/Shopix
-📂 **GitHub Repository:** https://github.com/Aditi-2909/Shopix
-
+📂 **GitHub Repository:** https://github.com/Atanu-18/Shopix & https://github.com/Aditi-2909/Shopix
 ---
 
 ## ✨ Features
