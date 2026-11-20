@@ -82,7 +82,7 @@ The main objective of Shopix is to develop a full-stack e-commerce application w
 Full Stack Developer | CSE Student
 
 - GitHub: https://github.com/Atanu-18
-- GitHub: https://github.com/Aditi-2909/Shopix
+- GitHub: https://github.com/Aditi-2909
 
 ---
 
